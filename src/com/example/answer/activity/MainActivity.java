@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.answer.R;
+import com.example.answer.application.MyApplication;
 import com.example.answer.bean.AnSwerInfo;
 import com.example.answer.database.DataBaseHelper;
 import com.example.answer.database.DataBaseManager;
@@ -129,15 +131,28 @@ public class MainActivity extends Activity {
                               }
                     });
 
-                    //视频教学
-                    b_vide.setOnClickListener(new OnClickListener() {
+                      //选择科目
+                      b_vide.setOnClickListener(new OnClickListener() {
 
-                              @Override
-                              public void onClick(View arg0) {
-                                        Intent intent = new Intent(MainActivity.this, VideoListActivity.class);
-                                        startActivity(intent);
-                              }
-                    });
+                          @Override
+                          public void onClick(View arg0) {
+                              final String[] set_way;
+                              AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                              set_way = new String[]{"TestData", "TestData", "TestData", "TestData"};
+                              String[] display_way = new String[]{"毛概", "马哲", "思修", "近代史"};
+                              builder.setTitle("请选择科目！");
+                              builder.setItems(display_way, new DialogInterface.OnClickListener() {
+                                  @Override
+                                  public void onClick(DialogInterface dialog, int which) {
+                                      SharedPreferences setting_user = MyApplication.getContext().getSharedPreferences("DB", 0);
+                                      SharedPreferences.Editor editor = setting_user.edit();
+                                      editor.putString("table_name",set_way[which]);
+                                      editor.apply();
+                                  }
+                              });
+                              builder.show();
+                          }
+                      });
 
                     //导入数据库
                     b_input.setOnClickListener(new OnClickListener() {

@@ -64,17 +64,17 @@
             android:layout_weight="1"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/b_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="视频教学"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:padding="10dip"
-                android:background="@drawable/darkblue_btn_bg"
                 android:layout_centerHorizontal="true"
-                />
+                android:background="@drawable/darkblue_btn_bg"
+                android:padding="10dip"
+                android:text="选择科目"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
 
         </RelativeLayout>
         <RelativeLayout
