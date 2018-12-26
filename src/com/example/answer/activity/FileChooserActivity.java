@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.answer.R;
-import com.example.answer.util.FileUtils;
 import com.example.answer.view.FileListFragment;
 
 import java.io.File;
@@ -43,8 +42,8 @@ import java.io.File;
 /**
  * Main Activity that handles the FileListFragments
  *
- * @version 2013-06-25
  * @author paulburke (ipaulpro)
+ * @version 2013-06-25
  */
 public class FileChooserActivity extends FragmentActivity implements
         OnBackStackChangedListener, FileListFragment.Callbacks {
@@ -82,7 +81,6 @@ public class FileChooserActivity extends FragmentActivity implements
 
         setTitle(mPath);
     }
-
 
 
     @Override

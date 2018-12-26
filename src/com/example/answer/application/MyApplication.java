@@ -6,15 +6,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 
-
 public class MyApplication extends Application {
     private static Context context;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        context = getApplicationContext();
 
-    }
     public static Context getContext() {
         return context;
     }
@@ -24,10 +18,17 @@ public class MyApplication extends Application {
             PackageManager manager = context.getPackageManager();
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
             String version = info.versionName;
-            return   version;
+            return version;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        context = getApplicationContext();
+
     }
 }

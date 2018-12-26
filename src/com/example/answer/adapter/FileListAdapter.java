@@ -31,9 +31,9 @@ import java.util.List;
 
 /**
  * List adapter for Files.
- * 
- * @version 2013-12-11
+ *
  * @author paulburke (ipaulpro)
+ * @version 2013-12-11
  */
 public class FileListAdapter extends BaseAdapter {
 

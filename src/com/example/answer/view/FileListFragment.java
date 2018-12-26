@@ -34,30 +34,16 @@ import java.util.List;
 
 /**
  * Fragment that displays a list of Files in a given path.
- * 
- * @version 2013-12-11
+ *
  * @author paulburke (ipaulpro)
+ * @version 2013-12-11
  */
 public class FileListFragment extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<File>> {
 
-    /**
-     * Interface to listen for events.
-     */
-    public interface Callbacks {
-        /**
-         * Called when a file is selected from the list.
-         *
-         * @param file The file selected
-         */
-        public void onFileSelected(File file);
-    }
-
     private static final int LOADER_ID = 0;
-
     private FileListAdapter mAdapter;
     private String mPath;
-
     private Callbacks mListener;
 
     /**
@@ -136,5 +122,17 @@ public class FileListFragment extends ListFragment implements
     @Override
     public void onLoaderReset(Loader<List<File>> loader) {
         mAdapter.clear();
+    }
+
+    /**
+     * Interface to listen for events.
+     */
+    public interface Callbacks {
+        /**
+         * Called when a file is selected from the list.
+         *
+         * @param file The file selected
+         */
+        public void onFileSelected(File file);
     }
 }
