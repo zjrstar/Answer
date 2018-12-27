@@ -22,6 +22,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.answer.R;
 import com.example.answer.adapter.ExaminationSubmitAdapter;
@@ -203,7 +204,11 @@ public class AnalogyExaminationActivity extends Activity {
         mode = getIntent().getIntExtra("mode", 0);
         number = getIntent().getStringExtra("number");
         initView();
-        loadData();
+        if(!loadData()){
+            Toast.makeText(getApplicationContext(), "都做过了！", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
         errorQuestionInfos = dbManager.queryAllData();
         if (errorQuestionInfos != null) {
             // 删除上次保存的我的错题
@@ -243,7 +248,7 @@ public class AnalogyExaminationActivity extends Activity {
     /**
      * 加载数据
      */
-    private void loadData() {
+    private boolean loadData() {
         //打开数据库
         DataBaseHelper myDbHelper = new DataBaseHelper(this);
         try {
@@ -276,7 +281,9 @@ public class AnalogyExaminationActivity extends Activity {
 //                              info.setOption_type("0");
 //                              dataItems.add(info);
 //                    }
-
+        if (dataItems==null){
+            return false;
+        }
 
         for (int i = 0; i < dataItems.size(); i++) {
             viewItems.add(getLayoutInflater().inflate(
@@ -298,6 +305,7 @@ public class AnalogyExaminationActivity extends Activity {
         }
         viewPager.getParent()
                 .requestDisallowInterceptTouchEvent(false);
+        return true;
     }
 
     /**
