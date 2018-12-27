@@ -102,10 +102,26 @@ public class MainActivity extends Activity {
                 builder.setItems(set_way, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
-                        intent.putExtra("mode", 1);
-                        intent.putExtra("number", set_way[which]);
-                        startActivity(intent);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("请选择抽取范围！");
+                        String[] rangeName = new String[]{"未做过", "全部习题"};
+                        final String choice = set_way[which];
+                        builder.setItems(rangeName, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
+
+                                intent.putExtra("number", choice);
+                                if(which==0){
+                                    intent.putExtra("mode", 3);
+                                }
+                                else {
+                                    intent.putExtra("mode", 1);
+                                }
+                                startActivity(intent);
+                            }
+                        });
+                        builder.show();
                     }
                 });
                 builder.show();
@@ -136,7 +152,7 @@ public class MainActivity extends Activity {
             public void onClick(View arg0) {
                 final String[] set_way;
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                set_way = new String[]{"TestData", "TestData", "TestData", "TestData"};
+                set_way = new String[]{"question", "TestData", "TestData", "TestData"};
                 String[] display_way = new String[]{"毛概", "马哲", "思修", "近代史"};
                 builder.setTitle("请选择科目！");
                 builder.setItems(display_way, new DialogInterface.OnClickListener() {

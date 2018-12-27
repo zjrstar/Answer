@@ -543,6 +543,9 @@ public class AnalogyExaminationActivity extends Activity {
                     }
 
                 }
+                for (AnSwerInfo question: dataItems){
+                    dataBaseManager.recordDone(question.getQuestionName());
+                }
                 builderSubmit.dismiss();
                 finish();
             }

@@ -51,10 +51,15 @@ public class DataBaseManager {
                 sql = "select questionId,questionName,optionA,optionB,optionC,optionD,optionE,correctAnswer,questionType,answerAnalysis,video_url from " + getTableName() + " where test_No='" + testNo + "' order by questionType desc";
                 break;
             case 1:
-                sql = "select questionId,questionName,optionA,optionB,optionC,optionD,optionE,correctAnswer,questionType,answerAnalysis,video_url FROM " + getTableName() + "  where  video_url='' ORDER BY RANDOM() limit " + number;
+                sql = "select questionId,questionName,optionA,optionB,optionC,optionD,optionE,correctAnswer,questionType,answerAnalysis,video_url FROM " + getTableName() +
+                        " ORDER BY RANDOM() limit " + number;
                 break;
             case 2:
                 sql = "select questionId,questionName,optionA,optionB,optionC,optionD,optionE,correctAnswer,questionType,answerAnalysis,video_url from " + getTableName() + " where errornumber>0";
+                break;
+            case 3:
+                sql = "select questionId,questionName,optionA,optionB,optionC,optionD,optionE,correctAnswer,questionType,answerAnalysis,video_url FROM " + getTableName() +
+                        "  where do_times=0 ORDER BY RANDOM() limit " + number;
                 break;
             default:
                 sql = null;
@@ -121,6 +126,15 @@ public class DataBaseManager {
             sql = "update " + getTableName() + " set errornumber=1 where questionName=\'" + questionName + "\'";
             db.execSQL(sql);
         }
+    }
+
+
+    public void recordDone(String questionName) {
+        String sql;
+
+        sql = "update " + getTableName() + " set do_times=do_times+1 where questionName=\'" + questionName + "\'";
+        db.execSQL(sql);
+
     }
 
     public String[] gettes_no() {

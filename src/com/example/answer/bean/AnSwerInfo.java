@@ -99,10 +99,16 @@ public class AnSwerInfo {
     }
 
     public void setOptionA(String optionA) {
+        if (optionA==null){
+            optionA = "";
+        }
         this.optionA = optionA;
     }
 
     public String getOptionB() {
+        if (optionB==null){
+            optionB = "";
+        }
         return optionB;
     }
 
@@ -111,6 +117,9 @@ public class AnSwerInfo {
     }
 
     public String getOptionC() {
+        if (optionC==null){
+            optionC = "";
+        }
         return optionC;
     }
 
@@ -119,6 +128,9 @@ public class AnSwerInfo {
     }
 
     public String getOptionD() {
+        if (optionD==null){
+            optionD = "";
+        }
         return optionD;
     }
 
@@ -143,6 +155,9 @@ public class AnSwerInfo {
     }
 
     public String getOptionE() {
+        if (optionE==null){
+            optionE = "";
+        }
         return optionE;
     }
 
