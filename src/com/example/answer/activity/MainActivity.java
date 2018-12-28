@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
     private Button b_input;
     private ImageView left;
     private TextView title;
+    private TextView statusText;
     private DataBaseHelper myDbHelper;
     private SQLiteDatabase db;
     private DataBaseManager dataBaseManager;
@@ -61,6 +62,7 @@ public class MainActivity extends Activity {
         b_vide = (Button) findViewById(b_video);
         b_wrontest = (Button) findViewById(b_wrongtest);
         b_input = (Button) findViewById(R.id.b_input);
+        statusText = (TextView)findViewById(R.id.statusTextView);
         //拷贝数据库
         copyDB();
 
@@ -162,6 +164,7 @@ public class MainActivity extends Activity {
                         SharedPreferences.Editor editor = setting_user.edit();
                         editor.putString("table_name", set_way[which]);
                         editor.apply();
+                        showStatus();
                     }
                 });
                 builder.show();
@@ -179,7 +182,27 @@ public class MainActivity extends Activity {
             }
         });
 
+        showStatus();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showStatus();
+    }
+
+    private void showStatus(){
+        String[] strings = dataBaseManager.getStatusCount();
+        if(strings[0]!=null){
+            String s = "已完成:" + strings[1] + " 未完成:" + strings[0] + " 加油！";
+            if(strings[0].equals("0")){
+                s = strings[1] + "题都做完了，真棒！";
+            }
+            statusText.setText(s);
+        }else {
+            statusText.setText("");
+        }
     }
 
     /**

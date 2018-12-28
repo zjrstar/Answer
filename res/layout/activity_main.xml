@@ -110,4 +110,13 @@
         android:padding="10dip"
         android:background="@drawable/darkblue_btn_bg"
         />
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="95dp"
+        android:text="" />
 </RelativeLayout>

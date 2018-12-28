@@ -152,6 +152,29 @@ public class DataBaseManager {
         return str;
     }
 
+    public String[] getStatusCount() {
+        String[] str = new String[2];
+        String sql = "select count(questionId) from " + getTableName() + " where do_times=0";
+        String sql1 = "select count(questionId) from " + getTableName() + " where do_times>0";
+        try {
+            Cursor cursor = db.rawQuery(sql, null);
+            if (cursor != null && cursor.getCount() > 0) {
+                if(cursor.moveToNext()){
+                    str[0] = cursor.getString(0);
+                }
+            }
+            cursor = db.rawQuery(sql1, null);
+            if (cursor != null && cursor.getCount() > 0) {
+                if(cursor.moveToNext()){
+                    str[1] = cursor.getString(0);
+                }
+            }
+        }catch (RuntimeException e){
+            System.out.println(e);
+        }
+        return str;
+    }
+
     public void insertData(AnSwerInfo anSwerInfo) {
         if (anSwerInfo.getAnalysis() == null) {
             anSwerInfo.setAnalysis("暂无解析");
