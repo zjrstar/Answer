@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
 
 
         left.setVisibility(View.GONE);
-        title.setText("答题测试");
+        title.setText(R.string.app_name);
 
         //模拟考试
         b_simtest.setOnClickListener(new OnClickListener() {
