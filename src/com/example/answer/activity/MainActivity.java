@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
         b_vide = (Button) findViewById(b_video);
         b_wrontest = (Button) findViewById(b_wrongtest);
         b_input = (Button) findViewById(R.id.b_input);
-        statusText = (TextView)findViewById(R.id.statusTextView);
+        statusText = (TextView) findViewById(R.id.statusTextView);
         //拷贝数据库
         copyDB();
 
@@ -75,19 +75,21 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                set_way = dataBaseManager.gettes_no();
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("请选择第几套试卷！");
-                builder.setItems(set_way, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
-                        intent.putExtra("mode", 0);
-                        intent.putExtra("testNo", set_way[which]);
-                        startActivity(intent);
-                    }
-                });
-                builder.show();
+                if (checkSubjectSelect()) {
+                    set_way = dataBaseManager.gettes_no();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("请选择第几套试卷！");
+                    builder.setItems(set_way, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
+                            intent.putExtra("mode", 0);
+                            intent.putExtra("testNo", set_way[which]);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.show();
+                }
             }
         });
 
@@ -97,36 +99,37 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                final String[] set_way;
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                set_way = new String[]{"5", "10", "15", "20", "30", "50"};
-                builder.setTitle("请选择抽题数！");
-                builder.setItems(set_way, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setTitle("请选择抽取范围！");
-                        String[] rangeName = new String[]{"未做过", "全部习题"};
-                        final String choice = set_way[which];
-                        builder.setItems(rangeName, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
+                if (checkSubjectSelect()) {
+                    final String[] set_way;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    set_way = new String[]{"5", "10", "15", "20", "30", "50"};
+                    builder.setTitle("请选择抽题数！");
+                    builder.setItems(set_way, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setTitle("请选择抽取范围！");
+                            String[] rangeName = new String[]{"未做过", "全部习题"};
+                            final String choice = set_way[which];
+                            builder.setItems(rangeName, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
 
-                                intent.putExtra("number", choice);
-                                if(which==0){
-                                    intent.putExtra("mode", 3);
+                                    intent.putExtra("number", choice);
+                                    if (which == 0) {
+                                        intent.putExtra("mode", 3);
+                                    } else {
+                                        intent.putExtra("mode", 1);
+                                    }
+                                    startActivity(intent);
                                 }
-                                else {
-                                    intent.putExtra("mode", 1);
-                                }
-                                startActivity(intent);
-                            }
-                        });
-                        builder.show();
-                    }
-                });
-                builder.show();
+                            });
+                            builder.show();
+                        }
+                    });
+                    builder.show();
+                }
             }
         });
 
@@ -135,14 +138,16 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                //判断错题库是否为空，为空则弹出Toast提示
-                if (dataBaseManager.getAnSwers(2, null, null) == null) {
-                    Toast.makeText(getApplicationContext(), "错题库为空，学霸赶紧去刷题吧！", Toast.LENGTH_LONG).show();
-                } else {
+                if (checkSubjectSelect()) {
+                    //判断错题库是否为空，为空则弹出Toast提示
+                    if (dataBaseManager.getAnSwers(2, null, null) == null) {
+                        Toast.makeText(getApplicationContext(), "错题库为空，学霸赶紧去刷题吧！", Toast.LENGTH_LONG).show();
+                    } else {
 
-                    Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
-                    intent.putExtra("mode", 2);
-                    startActivity(intent);
+                        Intent intent = new Intent(MainActivity.this, AnalogyExaminationActivity.class);
+                        intent.putExtra("mode", 2);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -154,8 +159,8 @@ public class MainActivity extends Activity {
             public void onClick(View arg0) {
                 final String[] set_way;
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                set_way = new String[]{"question", "TestData", "TestData", "TestData"};
-                String[] display_way = new String[]{"毛概", "马哲", "思修", "近代史"};
+                set_way = new String[]{"maogai", "mayuan", "sixiu"};
+                String[] display_way = new String[]{"毛概", "马哲", "思修"};
                 builder.setTitle("请选择科目！");
                 builder.setItems(display_way, new DialogInterface.OnClickListener() {
                     @Override
@@ -192,15 +197,25 @@ public class MainActivity extends Activity {
         showStatus();
     }
 
-    private void showStatus(){
+    private boolean checkSubjectSelect() {
+        SharedPreferences setting_user = MyApplication.getContext().getSharedPreferences("DB", 0);
+        String name = setting_user.getString("table_name", "");
+        if (name.equals("")) {
+            Toast.makeText(getApplicationContext(), "请先选择科目！", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void showStatus() {
         String[] strings = dataBaseManager.getStatusCount();
-        if(strings[0]!=null){
+        if (strings[0] != null) {
             String s = "已完成:" + strings[1] + " 未完成:" + strings[0] + " 加油！";
-            if(strings[0].equals("0")){
+            if (strings[0].equals("0")) {
                 s = strings[1] + "题都做完了，真棒！";
             }
             statusText.setText(s);
-        }else {
+        } else {
             statusText.setText("");
         }
     }
