@@ -106,26 +106,25 @@ public class DataBaseManager {
      *
      * @param questionName
      */
-    public void recordWroing(String questionName, int mode, int flag) {
-        String sql, sql2;
-        if (mode == 2) {
-            if (flag == 1) {//如果所有错题都答对
-                sql = "update " + getTableName() + " set errornumber=errornumber-1 where errornumber>0";
-                db.execSQL(sql);
-                System.out.println(sql);
-            } else {//部分错题答对
-                sql = "update " + getTableName() + " set errornumber=errornumber+1 where questionName=\'" + questionName + "\'";
-                sql2 = "update " + getTableName() + " set errornumber=errornumber-1 where (questionName<>\'" + questionName + "\') and (errornumber>0)";
-                db.execSQL(sql);
-                db.execSQL(sql2);
-                System.out.println(sql);
-                System.out.println(sql2);
+    public void recordWroing(String questionName) {
+        String sql;
+        sql = "update " + getTableName() + " set errornumber=errornumber+1 where questionName=\'" + questionName + "\'";
+        db.execSQL(sql);
+        System.out.println(sql);
 
-            }
+    }
+
+
+    public void recordCorrect(String questionId, String isCorrect) {
+        String sql = "";
+        if (isCorrect.equals("1")) {
+            sql = "update " + getTableName() + " set errornumber=errornumber-1 where questionId=\'" + questionId + "\'" + "and errornumber>0";
         } else {
-            sql = "update " + getTableName() + " set errornumber=1 where questionName=\'" + questionName + "\'";
-            db.execSQL(sql);
+            sql = "update " + getTableName() + " set errornumber=errornumber+1 where questionId=\'" + questionId + "\'";
         }
+        db.execSQL(sql);
+        System.out.println(sql);
+
     }
 
 
@@ -159,17 +158,17 @@ public class DataBaseManager {
         try {
             Cursor cursor = db.rawQuery(sql, null);
             if (cursor != null && cursor.getCount() > 0) {
-                if(cursor.moveToNext()){
+                if (cursor.moveToNext()) {
                     str[0] = cursor.getString(0);
                 }
             }
             cursor = db.rawQuery(sql1, null);
             if (cursor != null && cursor.getCount() > 0) {
-                if(cursor.moveToNext()){
+                if (cursor.moveToNext()) {
                     str[1] = cursor.getString(0);
                 }
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             System.out.println(e);
         }
         return str;

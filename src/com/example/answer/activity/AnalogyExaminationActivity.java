@@ -204,7 +204,7 @@ public class AnalogyExaminationActivity extends Activity {
         mode = getIntent().getIntExtra("mode", 0);
         number = getIntent().getStringExtra("number");
         initView();
-        if(!loadData()){
+        if (!loadData()) {
             Toast.makeText(getApplicationContext(), "都做过了！", Toast.LENGTH_LONG).show();
             finish();
             return;
@@ -281,7 +281,7 @@ public class AnalogyExaminationActivity extends Activity {
 //                              info.setOption_type("0");
 //                              dataItems.add(info);
 //                    }
-        if (dataItems==null){
+        if (dataItems == null) {
             return false;
         }
 
@@ -542,16 +542,21 @@ public class AnalogyExaminationActivity extends Activity {
             @Override
             public void onClick(View v) {
                 errorQuestionInfos = dbManager.queryAllData();
-                if (errorQuestionInfos == null) {//所有错题都答对
-                    dataBaseManager.recordWroing(null, mode, 1);
-                } else {
-                    for (int i = 0; i < errorQuestionInfos.length; i++) {//部分错题答对
-                        dataBaseManager.recordWroing(errorQuestionInfos[i].getQuestionName(), mode, 0);
-                        System.out.println(errorQuestionInfos[i].getQuestionName());
+                if (errorQuestionInfos != null) {
+                    if (mode == 2) {//错题练习
+                        for (SaveQuestionInfo q : questionInfos) {
+                            dataBaseManager.recordCorrect(q.getQuestionId(), q.getIs_correct());
+                            System.out.println(q.getQuestionId());
+                            System.out.println(q.getIs_correct());
+                        }
+                    } else {
+                        for (ErrorQuestionInfo errorQuestionInfo : errorQuestionInfos) {
+                            dataBaseManager.recordWroing(errorQuestionInfo.getQuestionName());
+                            System.out.println(errorQuestionInfo.getQuestionName());
+                        }
                     }
-
                 }
-                for (AnSwerInfo question: dataItems){
+                for (AnSwerInfo question : dataItems) {
                     dataBaseManager.recordDone(question.getQuestionName());
                 }
                 builderSubmit.dismiss();
