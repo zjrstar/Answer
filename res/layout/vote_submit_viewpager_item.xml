@@ -55,7 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/home_menu_margin_8"
                 android:layout_marginTop="@dimen/home_menu_margin_5"
-                android:text="4/32" />        </LinearLayout>
+                android:text="4/32" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/activity_prepare_test_errorLayout"
@@ -329,6 +330,19 @@
                     />
             </LinearLayout>
 
+            <Button
+                android:layout_marginTop="20dp"
+                android:id="@+id/b_set_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:text="蒙对了？标为错题"
+                android:layout_marginRight="80dp"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:padding="10dip"
+                android:background="@drawable/darkblue_btn_bg"
+                android:layout_marginEnd="80dp" />
             
         </LinearLayout>
 

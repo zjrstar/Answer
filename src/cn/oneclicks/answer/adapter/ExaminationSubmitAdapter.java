@@ -9,10 +9,15 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cn.oneclicks.answer.R;
 import cn.oneclicks.answer.activity.AnalogyExaminationActivity;
@@ -22,10 +27,6 @@ import cn.oneclicks.answer.bean.ErrorQuestionInfo;
 import cn.oneclicks.answer.bean.SaveQuestionInfo;
 import cn.oneclicks.answer.database.DBManager;
 import cn.oneclicks.answer.util.ConstantUtil;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ExaminationSubmitAdapter extends PagerAdapter {
 
@@ -107,6 +108,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
         holder.ivC_ = (ImageView) convertView.findViewById(R.id.vote_submit_select_image_c_);
         holder.ivD_ = (ImageView) convertView.findViewById(R.id.vote_submit_select_image_d_);
         holder.ivE_ = (ImageView) convertView.findViewById(R.id.vote_submit_select_image_e_);
+        holder.setErrorButton = (Button) convertView.findViewById(R.id.b_set_error);
 
         holder.totalText.setText(position + 1 + "/" + dataItems.size());
 
@@ -174,6 +176,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivA.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvA.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -253,6 +256,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivB.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvB.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -331,6 +335,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivC.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvC.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -409,6 +414,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivD.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvD.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -487,6 +493,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivE.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvE.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -1023,6 +1030,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivA.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvA.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -1101,6 +1109,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivB.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvB.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -1179,6 +1188,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivC.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvC.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -1257,6 +1267,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivD.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvD.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -1335,6 +1346,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                         holder.ivE.setImageResource(R.drawable.ic_practice_test_right);
                         holder.tvE.setTextColor(Color.parseColor("#61bc31"));
                         isCorrect = ConstantUtil.isCorrect;
+                        holder.setErrorButton.setVisibility(View.VISIBLE);
                     } else {
                         isCorrect = ConstantUtil.isError;
                         errortopicNum += 1;
@@ -1401,6 +1413,39 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                 }
             });
         }
+
+        holder.setErrorButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (SaveQuestionInfo questionInfo : mContext.questionInfos) {
+                    if (questionInfo.getQuestionId().equals(dataItems.get(position).getQuestionId())) {
+                        questionInfo.setIs_correct(ConstantUtil.isError);
+                        ErrorQuestionInfo errorQuestionInfo = new ErrorQuestionInfo();
+                        errorQuestionInfo.setQuestionName(dataItems.get(position).getQuestionName());
+                        errorQuestionInfo.setQuestionType(dataItems.get(position).getQuestionType());
+                        errorQuestionInfo.setQuestionAnswer(dataItems.get(position).getCorrectAnswer());
+                        errorQuestionInfo.setIsRight(ConstantUtil.isError);
+                        errorQuestionInfo.setQuestionSelect("");
+                        errorQuestionInfo.setAnalysis(dataItems.get(position).getAnalysis());
+                        errorQuestionInfo.setOptionType(dataItems.get(position).getOption_type());
+                        if (dataItems.get(position).getOption_type().equals("0")) {
+                            errorQuestionInfo.setOptionA(dataItems.get(position).getOptionA());
+                            errorQuestionInfo.setOptionB(dataItems.get(position).getOptionB());
+                            errorQuestionInfo.setOptionC(dataItems.get(position).getOptionC());
+                            errorQuestionInfo.setOptionD(dataItems.get(position).getOptionD());
+                            errorQuestionInfo.setOptionE(dataItems.get(position).getOptionE());
+                        } else {
+                            errorQuestionInfo.setOptionA(dataItems.get(position).getOptionA().equals("") ? "" : imgServerUrl + dataItems.get(position).getOptionA());
+                            errorQuestionInfo.setOptionB(dataItems.get(position).getOptionB().equals("") ? "" : imgServerUrl + dataItems.get(position).getOptionB());
+                            errorQuestionInfo.setOptionC(dataItems.get(position).getOptionC().equals("") ? "" : imgServerUrl + dataItems.get(position).getOptionC());
+                            errorQuestionInfo.setOptionD(dataItems.get(position).getOptionD().equals("") ? "" : imgServerUrl + dataItems.get(position).getOptionD());
+                            errorQuestionInfo.setOptionE(dataItems.get(position).getOptionE().equals("") ? "" : imgServerUrl + dataItems.get(position).getOptionE());
+                        }
+                        long colunm = dbManager.insertErrorQuestion(errorQuestionInfo);
+                    }
+                }
+            }
+        });
 
         ForegroundColorSpan blueSpan = new ForegroundColorSpan(Color.parseColor("#2b89e9"));
 
@@ -1533,6 +1578,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                             questionInfo.setIs_correct(isCorrect);
                             mContext.questionInfos.add(questionInfo);
                             dataItems.get(mPosition1).setIsSelect("0");
+                            viewHolder.setErrorButton.setVisibility(View.VISIBLE);
                             //提交答题
                             mContext.uploadExamination(errortopicNum);
                         } else {
@@ -1681,6 +1727,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                                     mContext.questionInfos.add(questionInfo);
                                     dataItems.get(mPosition1).setIsSelect("0");
                                     isNext = mIsNext;
+                                    viewHolder.setErrorButton.setVisibility(View.VISIBLE);
                                     mContext.setCurrentView(mPosition);
                                 } else {
                                     //清除答案
@@ -1804,6 +1851,7 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
         ImageView ivC_;
         ImageView ivD_;
         ImageView ivE_;
+        Button setErrorButton;
     }
 
 }

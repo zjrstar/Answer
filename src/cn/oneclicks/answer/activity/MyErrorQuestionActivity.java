@@ -113,7 +113,11 @@ public class MyErrorQuestionActivity extends Activity {
                 errorQuestion.setQuestionName(errorQuestionInfos[i].questionName);
                 errorQuestion.setQuestionType(errorQuestionInfos[i].questionType);
                 errorQuestion.setQuestionAnswer(errorQuestionInfos[i].questionAnswer);
-                errorQuestion.setQuestionSelect(errorQuestionInfos[i].questionSelect);
+                if(errorQuestionInfos[i].questionSelect!=null) {
+                    errorQuestion.setQuestionSelect(errorQuestionInfos[i].questionSelect);
+                }else {
+                    errorQuestion.setQuestionSelect("");
+                }
                 errorQuestion.setIsRight(errorQuestionInfos[i].isRight);
                 errorQuestion.setAnalysis(errorQuestionInfos[i].Analysis);
                 errorQuestion.setOptionA(errorQuestionInfos[i].optionA);

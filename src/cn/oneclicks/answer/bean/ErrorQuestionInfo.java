@@ -9,11 +9,11 @@ public class ErrorQuestionInfo {
     public String questionSelect;
     public String isRight;
     public String Analysis;
-    public String optionA;
-    public String optionB;
-    public String optionC;
-    public String optionD;
-    public String optionE;
+    public String optionA = "";
+    public String optionB = "";
+    public String optionC = "";
+    public String optionD = "";
+    public String optionE = "";
     public String optionType;
 
     public int getQuestionId() {
