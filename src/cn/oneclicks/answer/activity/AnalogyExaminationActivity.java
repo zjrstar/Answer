@@ -205,7 +205,11 @@ public class AnalogyExaminationActivity extends Activity {
         number = getIntent().getStringExtra("number");
         initView();
         if (!loadData()) {
-            Toast.makeText(getApplicationContext(), "都做过了！", Toast.LENGTH_LONG).show();
+            if (mode == 3) {
+                Toast.makeText(getApplicationContext(), "都做过了！", Toast.LENGTH_LONG).show();
+            } else if (mode == 4) {
+                Toast.makeText(getApplicationContext(), "暂时没有错题！", Toast.LENGTH_LONG).show();
+            }
             finish();
             return;
         }
@@ -542,20 +546,21 @@ public class AnalogyExaminationActivity extends Activity {
             @Override
             public void onClick(View v) {
                 errorQuestionInfos = dbManager.queryAllData();
-                if (errorQuestionInfos != null) {
-                    if (mode == 2) {//错题练习
-                        for (SaveQuestionInfo q : questionInfos) {
-                            dataBaseManager.recordCorrect(q.getQuestionId(), q.getIs_correct());
-                            System.out.println(q.getQuestionId());
-                            System.out.println(q.getIs_correct());
-                        }
-                    } else {
+                if (mode == 2 || mode == 4) {//错题练习
+                    for (SaveQuestionInfo q : questionInfos) {
+                        dataBaseManager.recordCorrect(q.getQuestionId(), q.getIs_correct());
+                        System.out.println(q.getQuestionId());
+                        System.out.println(q.getIs_correct());
+                    }
+                } else {
+                    if (errorQuestionInfos != null) {
                         for (ErrorQuestionInfo errorQuestionInfo : errorQuestionInfos) {
                             dataBaseManager.recordWroing(errorQuestionInfo.getQuestionName());
                             System.out.println(errorQuestionInfo.getQuestionName());
                         }
                     }
                 }
+
                 for (AnSwerInfo question : dataItems) {
                     dataBaseManager.recordDone(question.getQuestionName());
                 }

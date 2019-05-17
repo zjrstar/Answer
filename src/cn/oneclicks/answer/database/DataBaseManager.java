@@ -61,6 +61,10 @@ public class DataBaseManager {
                 sql = "select questionId,questionName,optionA,optionB,optionC,optionD,optionE,correctAnswer,questionType,answerAnalysis,video_url FROM " + getTableName() +
                         "  where do_times=0 ORDER BY RANDOM() limit " + number;
                 break;
+            case 4:
+                sql = "select questionId,questionName,optionA,optionB,optionC,optionD,optionE,correctAnswer,questionType,answerAnalysis,video_url FROM " + getTableName() +
+                        "  where errornumber>0 ORDER BY RANDOM() limit " + number;
+                break;
             default:
                 sql = null;
         }
