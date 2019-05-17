@@ -109,7 +109,7 @@ public class MainActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setTitle("请选择抽取范围！");
-                            String[] rangeName = new String[]{"未做过", "全部习题"};
+                            String[] rangeName = new String[]{"未做过", "全部习题", "错题"};
                             final String choice = set_way[which];
                             builder.setItems(rangeName, new DialogInterface.OnClickListener() {
                                 @Override
@@ -119,8 +119,10 @@ public class MainActivity extends Activity {
                                     intent.putExtra("number", choice);
                                     if (which == 0) {
                                         intent.putExtra("mode", 3);
-                                    } else {
+                                    } else if (which == 1) {
                                         intent.putExtra("mode", 1);
+                                    } else {
+                                        intent.putExtra("mode", 4);
                                     }
                                     startActivity(intent);
                                 }
