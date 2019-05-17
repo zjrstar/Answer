@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.answer"
+    package="cn.oneclicks.answer"
     android:versionCode="1"
-    android:versionName="1.7" >
+    android:versionName="2.0" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -13,9 +13,9 @@
         android:icon="@drawable/ic_launcher_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:name="com.example.answer.application.MyApplication">
+        android:name="cn.oneclicks.answer.application.MyApplication">
         <activity
-            android:name="com.example.answer.activity.MainActivity"
+            android:name="cn.oneclicks.answer.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

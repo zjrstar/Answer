@@ -16,13 +16,12 @@ buildscript {
 apply plugin: 'android'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
+    compile fileTree(include: '*.jar', dir: 'libs')
 }
 
 android {
     compileSdkVersion 19
     buildToolsVersion "24.0.3"
-
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -45,6 +44,11 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+    }
+    defaultConfig {
+        applicationId 'cn.oneclicks.answer'
+    }
+    productFlavors {
     }
 }
 
