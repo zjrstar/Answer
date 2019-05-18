@@ -1418,7 +1418,8 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
             @Override
             public void onClick(View view) {
                 for (SaveQuestionInfo questionInfo : mContext.questionInfos) {
-                    if (questionInfo.getQuestionId().equals(dataItems.get(position).getQuestionId())) {
+                    if (questionInfo.getQuestionId().equals(dataItems.get(position).getQuestionId())
+                            && questionInfo.getIs_correct().equals(ConstantUtil.isCorrect)) {
                         questionInfo.setIs_correct(ConstantUtil.isError);
                         ErrorQuestionInfo errorQuestionInfo = new ErrorQuestionInfo();
                         errorQuestionInfo.setQuestionName(dataItems.get(position).getQuestionName());
@@ -1442,8 +1443,11 @@ public class ExaminationSubmitAdapter extends PagerAdapter {
                             errorQuestionInfo.setOptionE(dataItems.get(position).getOptionE().equals("") ? "" : imgServerUrl + dataItems.get(position).getOptionE());
                         }
                         long colunm = dbManager.insertErrorQuestion(errorQuestionInfo);
+                        Toast.makeText(mContext, "已标为错题！", Toast.LENGTH_SHORT).show();
+                        return;
                     }
                 }
+                Toast.makeText(mContext, "已经是错题了！", Toast.LENGTH_SHORT).show();
             }
         });
 

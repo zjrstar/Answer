@@ -335,7 +335,7 @@
                 android:id="@+id/b_set_error"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:text="蒙对了？标为错题"
                 android:layout_marginRight="80dp"
                 android:textColor="#ffffff"
