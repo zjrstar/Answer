@@ -34,10 +34,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.File;
+
 import cn.oneclicks.answer.R;
 import cn.oneclicks.answer.view.FileListFragment;
-
-import java.io.File;
 
 /**
  * Main Activity that handles the FileListFragments

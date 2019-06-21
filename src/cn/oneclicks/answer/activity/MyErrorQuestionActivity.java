@@ -13,16 +13,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import cn.oneclicks.answer.R;
 import cn.oneclicks.answer.adapter.MyErrorQuestionListAdapter;
 import cn.oneclicks.answer.bean.ErrorQuestion;
 import cn.oneclicks.answer.bean.ErrorQuestionInfo;
 import cn.oneclicks.answer.database.DBManager;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 我的错题
@@ -113,9 +113,9 @@ public class MyErrorQuestionActivity extends Activity {
                 errorQuestion.setQuestionName(errorQuestionInfos[i].questionName);
                 errorQuestion.setQuestionType(errorQuestionInfos[i].questionType);
                 errorQuestion.setQuestionAnswer(errorQuestionInfos[i].questionAnswer);
-                if(errorQuestionInfos[i].questionSelect!=null) {
+                if (errorQuestionInfos[i].questionSelect != null) {
                     errorQuestion.setQuestionSelect(errorQuestionInfos[i].questionSelect);
-                }else {
+                } else {
                     errorQuestion.setQuestionSelect("");
                 }
                 errorQuestion.setIsRight(errorQuestionInfos[i].isRight);

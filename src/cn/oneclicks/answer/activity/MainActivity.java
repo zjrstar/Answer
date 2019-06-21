@@ -179,12 +179,22 @@ public class MainActivity extends Activity {
         });
 
         //导入数据库
+//        b_input.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent getContentIntent = FileUtils.createGetContentIntent();
+//                Intent intent = Intent.createChooser(getContentIntent, "Select a file");
+//                startActivityForResult(intent, REQUEST_CHOOSER);
+//
+//            }
+//        });
+
+        //关于
         b_input.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent getContentIntent = FileUtils.createGetContentIntent();
-                Intent intent = Intent.createChooser(getContentIntent, "Select a file");
-                startActivityForResult(intent, REQUEST_CHOOSER);
+                Intent intent = new Intent(MainActivity.this, About.class);
+                startActivity(intent);
 
             }
         });

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.oneclicks.answer"
     android:versionCode="1"
-    android:versionName="2.1" >
+    android:versionName="@string/versionName" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -59,6 +59,8 @@
                   android:label="Video"
                   android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".activity.About"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
 
         <activity
             android:name=".activity.FileChooserActivity"

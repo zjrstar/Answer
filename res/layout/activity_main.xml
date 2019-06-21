@@ -101,7 +101,7 @@
         android:id="@+id/b_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="导入数据库"
+        android:text="关于"
         android:layout_marginRight="80dp"
         android:layout_below="@id/rl_02"
         android:layout_centerHorizontal="true"

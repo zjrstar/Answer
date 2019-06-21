@@ -20,12 +20,12 @@ import android.content.Context;
 import android.os.FileObserver;
 import android.support.v4.content.AsyncTaskLoader;
 
-import cn.oneclicks.answer.util.FileUtils;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import cn.oneclicks.answer.util.FileUtils;
 
 /**
  * Loader that returns a list of Files in a given file path.

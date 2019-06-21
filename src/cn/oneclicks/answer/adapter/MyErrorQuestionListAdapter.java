@@ -8,10 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import cn.oneclicks.answer.R;
-
 import java.util.List;
 import java.util.Map;
+
+import cn.oneclicks.answer.R;
 
 /**
  * 我的错题列表

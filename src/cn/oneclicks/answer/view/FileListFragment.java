@@ -25,12 +25,12 @@ import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ListView;
 
+import java.io.File;
+import java.util.List;
+
 import cn.oneclicks.answer.R;
 import cn.oneclicks.answer.activity.FileChooserActivity;
 import cn.oneclicks.answer.adapter.FileListAdapter;
-
-import java.io.File;
-import java.util.List;
 
 /**
  * Fragment that displays a list of Files in a given path.

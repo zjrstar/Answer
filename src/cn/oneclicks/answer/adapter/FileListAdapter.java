@@ -23,11 +23,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import cn.oneclicks.answer.R;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.oneclicks.answer.R;
 
 /**
  * List adapter for Files.

@@ -4,11 +4,11 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import cn.oneclicks.answer.application.MyApplication;
-import cn.oneclicks.answer.bean.AnSwerInfo;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.oneclicks.answer.application.MyApplication;
+import cn.oneclicks.answer.bean.AnSwerInfo;
 
 /**
  * 作者：Jacky

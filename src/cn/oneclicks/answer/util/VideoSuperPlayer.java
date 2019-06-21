@@ -27,10 +27,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
-import cn.oneclicks.answer.R;
-
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cn.oneclicks.answer.R;
 
 public class VideoSuperPlayer extends RelativeLayout implements SurfaceTextureListener {
     private final int TIME_SHOW_CONTROLLER = 5000;

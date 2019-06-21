@@ -12,6 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import cn.oneclicks.answer.R;
 import cn.oneclicks.answer.activity.AnalogyExaminationActivity;
 import cn.oneclicks.answer.activity.VideoListActivity;
@@ -19,10 +23,6 @@ import cn.oneclicks.answer.bean.AnSwerInfo;
 import cn.oneclicks.answer.bean.ErrorQuestionInfo;
 import cn.oneclicks.answer.database.DBManager;
 import cn.oneclicks.answer.util.ConstantUtil;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 作者：Jacky

@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import cn.oneclicks.answer.R;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import cn.oneclicks.answer.R;
 
 public class VideoMediaController extends FrameLayout implements
         SeekBar.OnSeekBarChangeListener, View.OnClickListener {

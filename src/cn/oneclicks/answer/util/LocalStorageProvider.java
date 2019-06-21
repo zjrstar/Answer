@@ -15,12 +15,12 @@ import android.provider.DocumentsProvider;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import cn.oneclicks.answer.R;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import cn.oneclicks.answer.R;
 
 public class LocalStorageProvider extends DocumentsProvider {
 

@@ -21,16 +21,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.oneclicks.answer.R;
 import cn.oneclicks.answer.bean.VideoBean;
 import cn.oneclicks.answer.util.ConstanUrl;
 import cn.oneclicks.answer.util.MediaHelp;
 import cn.oneclicks.answer.util.VideoSuperPlayer;
 import cn.oneclicks.answer.util.VideoSuperPlayer.VideoPlayCallbackImpl;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static cn.oneclicks.answer.R.id.i_image;
 

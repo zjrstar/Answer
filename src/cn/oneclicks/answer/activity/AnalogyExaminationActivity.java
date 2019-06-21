@@ -24,6 +24,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import cn.oneclicks.answer.R;
 import cn.oneclicks.answer.adapter.ExaminationSubmitAdapter;
 import cn.oneclicks.answer.adapter.SimulationExaminationAdapter;
@@ -36,14 +44,6 @@ import cn.oneclicks.answer.database.DataBaseManager;
 import cn.oneclicks.answer.util.ConstantUtil;
 import cn.oneclicks.answer.util.ViewPagerScroller;
 import cn.oneclicks.answer.view.VoteSubmitViewPager;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * 答题
