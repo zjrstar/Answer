@@ -8,7 +8,7 @@ Fork from https://github.com/code-hunter/Answer
 
 欢迎有能力的学弟学妹继续维护！
 
-[直接下载最新版](Answer-master-release.apk)
+[直接下载最新版](Answer-master-release.apk?raw=true)
 
 ## 增加功能
 1. 数据库多表切换功能(适应切换马原，毛概，思修等)

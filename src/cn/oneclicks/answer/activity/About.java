@@ -26,7 +26,7 @@ public class About extends Activity {
 
 
     public void officialSite(View view) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://github.com"));
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/billzyx/Answer"));
         startActivity(intent);
     }
 
