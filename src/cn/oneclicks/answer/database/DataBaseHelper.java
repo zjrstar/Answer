@@ -1,19 +1,24 @@
 package cn.oneclicks.answer.database;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import cn.oneclicks.answer.application.MyApplication;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "/data/data/cn.oneclicks.answer/databases/";
+    private final String DB_PATH;
 
     private static String DB_NAME = "TestData.db";
     private final Context myContext;
@@ -29,6 +34,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         super(context, DB_NAME, null, 2);
         this.myContext = context;
+        ContextWrapper cw =new ContextWrapper(MyApplication.getContext());
+        DB_PATH = cw.getFilesDir().getAbsolutePath().replace("/files", "")
+                + "/databases/";
     }
 
     /**
@@ -49,6 +57,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             try {
                 copyDataBase();
             } catch (IOException e) {
+                System.out.println(e);
                 throw new Error("Error copying database");
             }
         }
@@ -69,7 +78,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
         } catch (SQLiteException e) {
-
+            System.out.println("database does't exist yet.");
             //database does't exist yet.
 
         }
@@ -130,6 +139,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super.close();
 
     }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        db.disableWriteAheadLogging();
+        super.onOpen(db);
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

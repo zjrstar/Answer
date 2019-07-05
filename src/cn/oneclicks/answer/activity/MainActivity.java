@@ -2,6 +2,7 @@ package cn.oneclicks.answer.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -364,7 +365,10 @@ public class MainActivity extends Activity {
     private void copyDB() {
         //加载数据库 拷贝(第一次) 读取(第二次)
         //判断数据库是否存在
-        String path = "/data/data/cn.oneclicks.answer/databases/TestData.db";
+        ContextWrapper cw =new ContextWrapper(getApplicationContext());
+        String path =cw.getFilesDir().getAbsolutePath().replace("/files", "")
+                + "/databases/TestData.db";
+//        String path = "/data/data/cn.oneclicks.answer/databases/TestData.db";
         File file = new File(path);
         System.out.println(file.exists());
         //创建数据库助手类
